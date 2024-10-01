@@ -1,0 +1,10 @@
+{
+    "tokenizer_name": "xlm-roberta-base",
+    "num_labels": 3,
+    "max_length": 128,
+    "batch_size": 16,
+    "epochs": 4,
+    "early_stopping_patience": 2,
+    "learning_rate": 0.00002,
+    "data_path": "./data/labeled_reviews_with_lexicon.csv"
+}
