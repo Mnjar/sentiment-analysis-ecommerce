@@ -2,7 +2,7 @@ import json
 import tensorflow as tf
 from transformers import XLMRobertaTokenizer
 import pandas as pd
-from keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.text import Tokenizer
 from keras.preprocessing.sequence import pad_sequences
 
 # Load hyperparameters
@@ -37,7 +37,9 @@ def tokenize_data(data, tokenizer, max_length):
         input_ids.append(encoded_dict['input_ids'])
         attention_masks.append(encoded_dict['attention_mask'])
 
-    return tf.convert_to_tensor(input_ids, dtype=tf.int32), tf.convert_to_tensor(attention_masks, dtype=tf.int64), tf.convert_to_tensor(data['sentiment_label'].values)
+    labels = pd.get_dummies(data['sentiment_label']).to_numpy()  # One-hot encode labels
+
+    return tf.convert_to_tensor(input_ids, dtype=tf.int32), tf.convert_to_tensor(attention_masks, dtype=tf.int64), tf.convert_to_tensor(labels)
 
 def squeeze_tensors(input_ids, attention_masks):
     input_ids = tf.squeeze(input_ids, axis=1)

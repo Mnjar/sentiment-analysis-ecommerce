@@ -39,7 +39,7 @@ def create_gru_model(input_shape, num_classes):
 def compile_rnns_model(model, learning_rate):
     model.compile(
         loss='categorical_crossentropy', 
-        optimizer=tf.keras.optimizers.Adam(learning_rate=learning_rate), 
+        optimizer=tf.keras.optimizers.legacy.Adam(learning_rate=learning_rate), 
         metrics=['accuracy']
     )
     

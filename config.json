@@ -3,7 +3,8 @@
     "num_labels": 3,
     "max_length": 128,
     "batch_size": 16,
-    "epochs": 4,
+    "roberta_epochs": 5,
+    "rnns_epochs": 30,
     "early_stopping_patience": 2,
     "learning_rate": 0.00002,
     "data_path": "./data/labeled_reviews_with_lexicon.csv"

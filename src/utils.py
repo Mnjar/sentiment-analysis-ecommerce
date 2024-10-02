@@ -8,6 +8,7 @@ import numpy as np
 
 def load_data(file_path: str, is_roberta_model: bool=False):
     data = pd.read_csv(file_path)
+    data = data.dropna()
     sentiment_label = {'negative': 0, 'neutral': 1, 'positive': 2}
     data['sentiment_label'] = data['sentiment_label'].map(sentiment_label).astype(int)
     
@@ -25,10 +26,10 @@ def load_data(file_path: str, is_roberta_model: bool=False):
         x_train, x_val, y_train, y_val = train_test_split(X, Y, test_size=0.2, random_state=42)
         
         #save tokenizer
-        with open('../models/rnns_tokenizer.pkl', 'wb') as handle:
+        with open('models/tokenizer.pkl', 'wb') as handle:
             pickle.dump(tokenizer, handle, protocol=pickle.HIGHEST_PROTOCOL)
         
-        return x_train, x_val, y_train, y_val
+        return x_train, x_val, y_train, y_val, X.shape[1]
 
 def log_evaluation_results(report, conf_matrix, path='evaluation_results.txt'):
     with open(path, 'w') as f:

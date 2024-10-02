@@ -6,5 +6,5 @@ reviews = [
         "Kualitas biasa saja, kurang memuaskan."
     ]
 
-lstm_inference = rnns_inference('../models/lstm_model.h5', reviews)
-gru_inference = rnns_inference('../models/gru_model.h5', reviews)
+lstm_inference = rnns_inference('/models/gru_model.h5', reviews)
+gru_inference = rnns_inference('/models/gru_model.h5', reviews)

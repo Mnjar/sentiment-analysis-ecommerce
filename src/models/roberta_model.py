@@ -7,13 +7,18 @@ from utils import log_evaluation_results
 
 def create_roberta_model(tokenizer_name, num_labels):
     model = TFXLMRobertaForSequenceClassification.from_pretrained(tokenizer_name, num_labels=num_labels)
+    
+    model.roberta.trainable = False
+    for layer in model.roberta.encoder.layer[-3:]:
+        layer.trainable = True 
+    
     return model
 
 def compile_roberta_model(model, learning_rate):
-    optimizer = tf.keras.optimizers.legacy.Adam(learning_rate=learning_rate)
-    loss = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True)
-    metric = tf.keras.metrics.SparseCategoricalAccuracy('accuracy')
-    model.compile(optimizer=optimizer, loss=loss, metrics=[metric])
+    optimizer = tf.keras.optimizers.Adam(learning_rate=learning_rate)
+    loss = tf.keras.losses.CategoricalCrossentropy(from_logits=True)
+    metric = tf.keras.metrics.CategoricalAccuracy('accuracy')
+    model.compile(optimizer='adam', loss=loss, metrics=['accuracy'])
 
 def evaluate_roberta_model(model, test_input_ids, test_attention_masks, test_labels):
     # Predict labels for test data
