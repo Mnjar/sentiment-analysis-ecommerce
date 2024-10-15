@@ -1,4 +1,4 @@
 .DS_Store
 mlruns
 logs
-__pycache__
+src/__pycache__
