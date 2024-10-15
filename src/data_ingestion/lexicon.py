@@ -13,6 +13,12 @@ def load_lexicon(lexicon_url):
         return {}
 
 def calculate_sentiment_score(text, lexicon_positive, lexicon_negative):
+    """Calculate sentiment base of polarity score
+    
+    Args:
+        text (str): review text
+        lexicon_positive (str): link of lexicon_positive data
+    """
     tokens = word_tokenize(text)
     score = sum(lexicon_positive.get(word, 0) - lexicon_negative.get(word, 0) for word in tokens)
     

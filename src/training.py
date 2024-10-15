@@ -2,8 +2,8 @@ import json
 import os
 import datetime
 import tensorflow as tf
-from tf_keras.callbacks import TensorBoard, EarlyStopping
-# from tensorflow.keras.callbacks import EarlyStopping, TensorBoard
+# from tf_keras.callbacks import TensorBoard, EarlyStopping
+from tensorflow.keras.callbacks import EarlyStopping, TensorBoard
 import matplotlib.pyplot as plt
 import mlflow
 import mlflow.tensorflow
@@ -104,9 +104,9 @@ if __name__ == "__main__":
     tokenizer = load_roberta_tokenizer(config['tokenizer_name'])
     
     # Tokenize data untuk model Roberta
-    train_input_ids, train_attention_masks, train_labels = tokenize_data(train_data, tokenizer, config['max_length'])
-    val_input_ids, val_attention_masks, val_labels = tokenize_data(val_data, tokenizer, config['max_length'])
-    test_input_ids, test_attention_masks, test_labels = tokenize_data(test_data, tokenizer, config['max_length'])
+    train_input_ids, train_attention_masks, train_labels = tokenize_data(tokenizer, config['max_length'], data=train_data)
+    val_input_ids, val_attention_masks, val_labels = tokenize_data(tokenizer, config['max_length'], data=val_data)
+    test_input_ids, test_attention_masks, test_labels = tokenize_data(tokenizer, config['max_length'], data=test_data)
 
     # Squeeze tensors untuk Roberta
     train_input_ids, train_attention_masks = squeeze_tensors(train_input_ids, train_attention_masks)
@@ -118,7 +118,7 @@ if __name__ == "__main__":
     lstm_model = create_lstm_model(input_shape=(X,), num_classes=(config['num_labels']))
     gru_model = create_gru_model(input_shape=(X,), num_classes=(config['num_labels']))
     
-    # compile_roberta_model(roberta_model, config['learning_rate'])
+    compile_roberta_model(roberta_model, config['learning_rate'])
     compile_rnns_model(lstm_model, config['learning_rate'])
     compile_rnns_model(gru_model, config['learning_rate'])
 

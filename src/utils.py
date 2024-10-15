@@ -7,6 +7,15 @@ import numpy as np
 
 
 def load_data(file_path: str, is_roberta_model: bool=False):
+    """Digunakan untuk load dataset
+
+    Args:
+        file_path (str): your dataset path
+        is_roberta_model (bool, optional): IF true, pembagian dataset berjalan seperti biasa. Defaults to False.
+
+    Returns:
+        splitting: list yang mengandung dataset yang dibagi menggunakan train_test_split module.
+    """
     data = pd.read_csv(file_path)
     data = data.dropna()
     sentiment_label = {'negative': 0, 'neutral': 1, 'positive': 2}

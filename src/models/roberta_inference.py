@@ -1,39 +1,7 @@
 import tensorflow as tf
 import json
-from tokenizer import load_roberta_tokenizer
+from tokenizer import load_roberta_tokenizer, tokenize_data
 from utils import load_model
-
-# Fungsi untuk melakukan tokenisasi
-def tokenize_reviews(reviews, tokenizer, max_length=128):
-    """
-    Melakukan tokenisasi pada ulasan baru.
-
-    Args:
-    - reviews (list): List ulasan baru.
-    - tokenizer: Tokenizer dari model RoBERTa.
-    - max_length (int): Panjang maksimum token.
-
-    Returns:
-    - input_ids (tensor): Tensor input ID dari ulasan.
-    - attention_masks (tensor): Tensor attention mask dari ulasan.
-    """
-    input_ids = []
-    attention_masks = []
-
-    for review in reviews:
-        encoded_dict = tokenizer.encode_plus(
-            review,
-            add_special_tokens=True,
-            max_length=max_length,
-            truncation=True,
-            padding='max_length',
-            return_attention_mask=True,
-            return_tensors='tf'
-        )
-        input_ids.append(encoded_dict['input_ids'])
-        attention_masks.append(encoded_dict['attention_mask'])
-
-    return tf.convert_to_tensor(input_ids, dtype=tf.int32), tf.convert_to_tensor(attention_masks, dtype=tf.int64)
 
 
 # Fungsi untuk melakukan prediksi sentimen
@@ -52,7 +20,7 @@ def predict_sentiment(reviews, model, tokenizer, label_map, max_length=128):
     - List berisi prediksi label sentimen untuk setiap ulasan.
     """
     # Tokenisasi ulasan baru
-    input_ids, attention_masks = tokenize_reviews(reviews, tokenizer, max_length)
+    input_ids, attention_masks = tokenize_data(reviews, tokenizer, max_length)
     
     # Squeeze untuk memastikan dimensi yang benar
     input_ids = tf.squeeze(input_ids, axis=1)
