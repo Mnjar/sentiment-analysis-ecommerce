@@ -2,7 +2,6 @@ import json
 import os
 import datetime
 import tensorflow as tf
-# from tf_keras.callbacks import TensorBoard, EarlyStopping
 from tensorflow.keras.callbacks import EarlyStopping, TensorBoard
 import matplotlib.pyplot as plt
 import mlflow
