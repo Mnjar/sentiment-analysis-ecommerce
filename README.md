@@ -73,21 +73,21 @@ The evaluation metrics used to measure model performance are Recall, Precision, 
 
 1. Precision
 
-   Precision measures the proportion of correct positive predictions out of all positive predictions made by the model.
+    Precision measures the proportion of correctly predicted positive sentiments out of all predictions made as positive.
 
     $$\text{PRECISSION} = \frac{TP}{TP+FP}$$
 
     Where TP is True Positives and FP is False Positives.
-    This metric shows how many of the churn predictions are actually churn. High precision means the model can minimize false positives.
+    In sentiment analysis, high precision means the model avoids labeling neutral or negative texts as positive sentiments.
 
 2. Recall
 
-    Recall measures the proportion of correct positive predictions out of all actual positive data.
+    Recall measures the proportion of correctly predicted positive sentiments out of all actual positive sentiments in the dataset.
 
     $$\text{RECALL} = \frac{TP}{TP+FN}$$
 
     Where FN is false negatives.
-    Recall gives an idea of ​​how well the model detects all churned customers. A high recall indicates that the model is able to catch many cases of churn even though there are some errors.
+    A high recall indicates that the model captures most of the positive sentiments, even if some predictions are incorrect.
 
 3. F1 Score
 
@@ -95,15 +95,15 @@ The evaluation metrics used to measure model performance are Recall, Precision, 
 
     $$\text{F1-Score} = 2 \cdot \frac{Precission \cdot Recall}{Precission + Recall}$$
 
-    A high F1 Score indicates that the model has a good performance in detecting churn by minimizing errors in both false positives and false negatives.
+    A high F1-Score shows that the model is effective at detecting positive sentiments while minimizing both false positives and false negatives.
 
 4. Accuracy
 
-    Accuracy measures the proportion of correct predictions (positive and negative) out of all predictions made by the model.
+    Accuracy measures the proportion of all correct predictions (positive, negative, and neutral) out of the total predictions.
 
     $$\text{Accuracy} = \frac{TP + TN}{TP+TN+FP+FN}$$
 
-    Accuracy provides a general idea of ​​how well the model is making predictions overall. However, in the case of imbalanced data, accuracy does not always accurately reflect the model's performance.
+    While accuracy provides a general measure of model performance, it may not be reliable for imbalanced sentiment datasets where one class (e.g., neutral) dominates.
 
 ## Result
 
